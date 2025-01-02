@@ -25,6 +25,7 @@ import validationErrorParser from "src/util/validationErrorParser";
  * handlers defined in `src/controllers`, the next function is the global error
  * handler in `src/app.ts`.
  */
+
 export const getTask: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
 

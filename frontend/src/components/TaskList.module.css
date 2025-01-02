@@ -1,0 +1,16 @@
+.listTitle {
+  font: var(--font-heading);
+}
+.innner {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: inherit;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.outer {
+  margin-top: 3em;
+}
