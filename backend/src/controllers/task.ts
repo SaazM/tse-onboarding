@@ -25,6 +25,7 @@ import validationErrorParser from "src/util/validationErrorParser";
  * handlers defined in `src/controllers`, the next function is the global error
  * handler in `src/app.ts`.
  */
+
 export const getTask: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
 
@@ -77,6 +78,27 @@ export const removeTask: RequestHandler = async (req, res, next) => {
     const result = await TaskModel.deleteOne({ _id: id });
 
     res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateTask: RequestHandler = async (req, res, next) => {
+  const errors = validationResult(req);
+  const linkId = req.params.id;
+  const bodyId = req.body._id;
+  try {
+    validationErrorParser(errors);
+    if (linkId != bodyId) {
+      res.status(400);
+    } else {
+      const result = await TaskModel.findByIdAndUpdate(bodyId, req.body);
+      if (result == null) {
+        res.status(404);
+      } else {
+        res.status(200).json(req.body);
+      }
+    }
   } catch (error) {
     next(error);
   }
