@@ -1,0 +1,45 @@
+.title {
+  font: var(--font-heading);
+}
+.description {
+  font: var(--font-body);
+}
+
+.bold {
+  font: var(--font-label);
+}
+
+.titleRow {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between; /* Push items to the ends */
+  align-items: center; /* Vertically align items (optional) */
+}
+
+.desRow {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center; /* Aligns the avatar and name vertically */
+  gap: 18px; /* Adds space between the avatar and the username */
+}
+
+.desContainer {
+  width: fit-content; /* Set a specific width */
+  word-wrap: break-word; /* Allow words to break mid-word */
+  word-break: break-word; /* Break long words */
+  white-space: normal; /* Allow wrapping */
+}
+.userContainer {
+  width: fit-content; /* Set a specific width */
+  white-space: nowrap; /* Prevent text from wrapping to a new line */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+}
+.titleContainer {
+  width: fit-content; /* Set a specific width */
+  white-space: nowrap; /* Prevent text from wrapping to a new line */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+}

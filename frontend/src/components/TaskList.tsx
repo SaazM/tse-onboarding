@@ -42,6 +42,7 @@ export function TaskList({ title }: TaskListProps) {
                   description: task.description,
                   isChecked: task.isChecked,
                   dateCreated: task.dateCreated,
+                  assignee: task.assignee!,
                 }}
               />
             </div>

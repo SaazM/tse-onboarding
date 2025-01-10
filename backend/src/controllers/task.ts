@@ -31,7 +31,7 @@ export const getTask: RequestHandler = async (req, res, next) => {
 
   try {
     // if the ID doesn't exist, then findById returns null
-    const task = await TaskModel.findById(id);
+    const task = await TaskModel.findById(id).populate("assignee");
 
     if (task === null) {
       throw createHttpError(404, "Task not found.");
@@ -50,23 +50,32 @@ export const getTask: RequestHandler = async (req, res, next) => {
 export const createTask: RequestHandler = async (req, res, next) => {
   // extract any errors that were found by the validator
   const errors = validationResult(req);
-  const { title, description, isChecked } = req.body;
+  const { title, description, isChecked, assignee } = req.body;
 
   try {
     // if there are errors, then this function throws an exception
     validationErrorParser(errors);
+    let finalAssign = assignee;
+    if (assignee == "") {
+      finalAssign = undefined;
+    }
 
-    const task = await TaskModel.create({
+    const created = await TaskModel.create({
       title: title,
       description: description,
       isChecked: isChecked,
       dateCreated: Date.now(),
+      assignee: finalAssign,
     });
+
+    const populatedTask = await created.populate("assignee");
 
     // 201 means a new resource has been created successfully
     // the newly created task is sent back to the user
-    res.status(201).json(task);
+    console.log(populatedTask);
+    res.status(201).json(populatedTask);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
@@ -92,11 +101,11 @@ export const updateTask: RequestHandler = async (req, res, next) => {
     if (linkId != bodyId) {
       res.status(400);
     } else {
-      const result = await TaskModel.findByIdAndUpdate(bodyId, req.body);
+      const result = await TaskModel.findByIdAndUpdate(bodyId, req.body).populate("assignee");
       if (result == null) {
         res.status(404);
       } else {
-        res.status(200).json(req.body);
+        res.status(200).json(result);
       }
     }
   } catch (error) {
