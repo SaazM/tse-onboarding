@@ -1,0 +1,23 @@
+.tag {
+  display: flex;
+  justify-content: start; /* Items will align to the left */
+  gap: 1rem; /* Add spacing between items */
+  align-items: center;
+  width: 12rem;
+}
+.icon img {
+  width: 32px; /* Adjust the icon size */
+  height: 32px;
+  border-radius: 50%; /* Makes the icon circular */
+  background-color: white; /* Background color for the icon area */
+  padding: 5px; /* Add padding for spacing */
+  margin-right: 5em;
+  vertical-align: middle;
+}
+
+.name {
+  margin-right: 5em;
+  vertical-align: bottom;
+  font: var(--font-body);
+  text-align: center;
+}
